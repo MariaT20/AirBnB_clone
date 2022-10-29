@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
 """
-The console of the AirBnB 
+The console of the AirBnB
 """
 
 import cmd
+
 
 class HbnbConsole(cmd.Cmd):
     """
@@ -24,5 +25,6 @@ class HbnbConsole(cmd.Cmd):
         """
         return True
 
+
 if __name__ == '__main__':
-        HbnbConsole().cmdloop()
+    HbnbConsole().cmdloop()
