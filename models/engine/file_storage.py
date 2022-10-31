@@ -34,15 +34,16 @@ class FileStorage():
 
         for key, value in self.__objects.items():
             obj_dict[key] = value.to_dict()
-        with open(self.__file_path, "w") as f:
+        with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump(obj_dict, f)
 
         def reload(self):
+            """ Deserializes theJSON file to __objects"""
             try:
-                with open(self.__file_path, "r") as f:
+                with open(self.__file_path, "r", encoding="utf-8") as f:
                     dict_obj = json.load(f)
                 for key, value in dict_obj.items():
-                    self.objects[keys] = eval(key.split(".")[0](**value)
+                    self.objects[keys] = eval(key.split(".")[0])(**value)
             except FileNotFoundError:
                 pass
 
