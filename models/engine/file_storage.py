@@ -6,7 +6,7 @@ import json
 #from helpers.class_loader import ClassLoader
 from models.base_model import BaseModel
 
-class FileStorage:
+class FileStorage():
     """This class handles object serialization and saving to file, file
     loading and deserialization to object.
     """
