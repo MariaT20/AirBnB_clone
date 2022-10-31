@@ -9,7 +9,7 @@ from datetime import datetime
 class BaseModel:
     """Defining the BaseModel"""
     def __init__(self, *args, **kwargs):
-        if **kwargs:
+        if kwargs:
             for key, value in **kwargs.items():
                 if key == "__class__":
                     continue
