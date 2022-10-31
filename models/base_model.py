@@ -10,6 +10,7 @@ import models
 class BaseModel:
     """Defining the BaseModel"""
     def __init__(self, *args, **kwargs):
+
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
