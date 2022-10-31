@@ -4,7 +4,7 @@
 import os
 import json
 from helpers.class_loader import ClassLoader
-
+from models.base_models import Basemodel
 
 class FileStorage:
     """This class handles object serialization and saving to file, file
@@ -25,6 +25,33 @@ class FileStorage:
         Args:
             obj(Object): The object to be added to `__objects`
         """
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
+
+    def save(self):
+        """serializes `__objects` to the JSON file `(path:     __file_path)`"""
+        obj_dict = {}
+
+        for key, value in self.__objects.items():
+            obj_dict[key] = value.to_dict()
+        with open(self.__file_path, "a") as f:
+            json.dump(obj_dict, f)
+
+        def reload(self):
+            try:
+                with open(self.__file_path, "r") as f:
+                    dict_obj = json.load(f)
+            except FileNotFoundError:
+                pass
+
+
+
+
+
+
+
+
+"""        
         className = obj.__class__.__name__
         model = ClassLoader.load(className)
 
@@ -35,7 +62,7 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        """serializes `__objects` to the JSON file `(path: __file_path)`"""
+        ""serializes `__objects` to the JSON file `(path: __file_path)`""
 
         objects = {}
         for key in self.__objects:
@@ -48,7 +75,7 @@ class FileStorage:
             fp.write(raw)
 
     def reload(self):
-        """deserializes the JSON file to `__objects`"""
+        ""deserializes the JSON file to `__objects`""
 
         if not os.path.isfile(self.__file_path):
             return
@@ -64,3 +91,4 @@ class FileStorage:
                 obj_class = ClassLoader.load(className)
                 obj = obj_class(**attributes)
                 self.__objects[key] = obj
+"""
