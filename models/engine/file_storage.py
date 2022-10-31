@@ -5,6 +5,15 @@
 import json
 #from helpers.class_loader import ClassLoader
 from models.base_model import BaseModel
+from models.user import User
+from models.review import Review
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.city import city
+
+
+
 
 class FileStorage():
     """This class handles object serialization and saving to file, file
@@ -13,6 +22,8 @@ class FileStorage():
 
     __file_path = "file.json"
     __objects = {}
+    class_dict = {"BaseModel":BaseModel, "User":User, "Place":Place, 
+            "Review":Review, "City":City, "Amenity":Amenity, "State":State}
 
     def all(self):
         """returns the dictionary `__objects`"""
@@ -38,12 +49,15 @@ class FileStorage():
             json.dump(obj_dict, f)
 
         def reload(self):
-            """ Deserializes theJSON file to __objects"""
+            """ Deserializes theJSON file to __objects only if
+            __file_path exists. Otherwise, do nothing
+            """
             try:
                 with open(self.__file_path, "r", encoding="utf-8") as f:
                     dict_obj = json.load(f)
                 for key, value in dict_obj.items():
-                    self.objects[keys] = eval(key.split(".")[0])(**value)
+                    val_ue =self.class_dict[value['__class__']]](**value)
+                    self.__objests[key] = val_ue
             except FileNotFoundError:
                 pass
 
