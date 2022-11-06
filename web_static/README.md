@@ -1,1 +1,1 @@
-learning HTML & CSS
+WEB STATIC
